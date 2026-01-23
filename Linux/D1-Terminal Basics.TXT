@@ -1,0 +1,15 @@
+#Basic Commands in Linux Terminal
+
+pwd        # where am I
+ls         # what’s here
+cd         # move around
+mkdir      # create folder
+rm         # delete (dangerous, respect it)
+cp         # copy
+mv         # move / rename
+clear      # clean screen
+
+task : create a file and folder in the current directory
+mkdir test
+touch test/file.txt
+echo "Hello, World!" > test/file.txt
