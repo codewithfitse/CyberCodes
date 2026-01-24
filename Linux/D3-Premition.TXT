@@ -1,0 +1,23 @@
+
+# premition 
+
+7 6 4 rule : read write execute permission for user, group, other 
+
+rwx - 7
+rw- - 6
+r-- - 4
+
+-rw-r--r-- 1 root root 1000 Jan 22 12:00 file.txt
+-rw-r--r-- 1 root root 1000 Jan 22 12:00 file.txt
+ task : change the permission of the file to 777
+ chmod 777 file.txt
+ task : change the permission of the folder to 777
+ chmod 777 folder
+ task : change the permission of the file to 666
+ chmod 666 file.txt
+ task : change the permission of the folder to 666
+ chmod 666 folder
+ task : change the permission of the file to 444
+ chmod 444 file.txt
+ task : change the permission of the folder to 444
+ chmod 444 folder
