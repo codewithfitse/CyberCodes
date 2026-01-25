@@ -1,0 +1,25 @@
+# File permissions in Linux and ownership
+
+# File permissions
+chmod 755 file.txt
+chmod 644 file.txt
+chmod 777 file.txt
+chmod 666 file.txt
+chmod 444 file.txt
+chmod 555 file.txt
+chmod 333 file.txt
+chmod 222 file.txt
+chmod 111 file.txt
+
+# secret.txt
+touch secret.txt
+
+# list the files in the current directory
+ls -l
+
+# change the permission of the file to 640
+chmod 640 secret.txt
+
+# change the owner of the file to root
+sudo chown root:root secret.txt
+
