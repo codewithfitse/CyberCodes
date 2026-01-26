@@ -1,0 +1,35 @@
+# user and group in linux
+
+# list the users in the system
+sudo cat /etc/passwd
+# list the groups in the system
+sudo cat /etc/group | grep newgroup       
+# add a new user
+sudo adduser newuser
+
+# add a new group
+sudo addgroup newgroup
+
+# add a new user to a new group
+sudo adduser newuser newgroup
+
+# remove a user
+sudo deluser newuser
+
+# remove a group
+sudo delgroup newgroup
+
+# remove a user from a group
+sudo deluser newuser newgroup
+
+# list the users in a new group
+sudo cat /etc/group | grep newgroup | grep newuser
+
+# list the groups in a new user
+sudo cat /etc/passwd | grep newuser | grep newgroup
+
+# list the users in a new user
+sudo cat /etc/passwd | grep newuser | grep newgroup
+
+# list the groups in a new user
+sudo cat /etc/group | grep newuser | grep newgroup
