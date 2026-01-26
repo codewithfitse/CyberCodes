@@ -1,0 +1,28 @@
+#Process Management in Linux
+
+# list the processes in the system
+ps aux
+
+# list the processes in the system
+ps aux | grep newuser
+
+# list the processes in the system
+ps aux | grep newgroup
+
+# list the processes in the system
+ps aux | grep newuser | grep newgroup
+
+#kill the process
+kill -9 1234
+
+#start and stop a process systemctl
+systemctl start newuser
+systemctl stop newuser
+
+#start and stop a process systemctl
+systemctl start newgroup
+systemctl stop newgroup
+
+#start and stop a process systemctl
+systemctl start newuser | newgroup
+systemctl stop newuser | newgroup
