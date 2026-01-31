@@ -1,0 +1,24 @@
+##1. Package Management
+sudo pacman -Syu	#Update system + all packages (daily hygiene)
+sudo pacman -S <package>	#Install a package
+sudo pacman -R <package>	#Remove a package
+pacman -Qs <package>	#Search for packages
+pacman -Qi <package>	#Info about installed package
+pacman -Ql <package>	#List all files installed by a package
+
+##2. Systemctl — Service Management
+systemctl status <service>	 #Check if service is running
+systemctl start <service>	 #Start a service now
+systemctl stop <service>	 #Stop a service
+systemctl restart <service>	 #Restart a service
+systemctl enable <service>	 #Start service on boot
+systemctl disable <service>	 #Don’t start on boot
+
+##3. Locating binaries — which & whereis
+which <command>	    #Shows path of executable in $PATH
+whereis <command>	#Shows executable, source, man page location
+
+#4 Others
+chmod / chown → Permissions for scripts or tools
+tar, zip → Installing from source or archives
+grep → Filtering logs or outputs
