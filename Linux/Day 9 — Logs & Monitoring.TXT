@@ -1,0 +1,16 @@
+#logs are system memory 
+
+1. /var/log - Hold System logs
+
+2. auth.log login attemts
+
+3. syslog - service starting/stopping
+
+4. kern.log - hardaware & driver issues
+
+5. dmesg - boot & hardaware logs
+
+6. Monitoring tools
+ 6.1 top - Real-time Processes & cpu usage 
+ 6.2 htop - Color, Mouse support, Easier to read
+
