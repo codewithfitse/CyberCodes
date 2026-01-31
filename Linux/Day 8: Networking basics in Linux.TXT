@@ -1,0 +1,26 @@
+ip a # Internate protocol adress
+
+ip r # Internate Protocol Router
+
+ping # Packet Internet Groper, This tell network active or dead
+
+ss -tulnp #Socket Statistics
+
+    flags:
+    -t = TCP
+
+    -u = UDP
+
+    -l = Listening
+
+    -n = Numbers (no DNS lookup)
+
+    -p = Process using the port
+
+
+netstat # Network Statistics, connection, ports, routing, interfaces
+
+/etc/hosts = Hostname Resolution File { 127.0.0.1 google.com }
+
+/etc/resolv.conf = Resolver Configuration { nameserver 8.8.8.8 }
+
