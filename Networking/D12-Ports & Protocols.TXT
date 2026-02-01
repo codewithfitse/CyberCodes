@@ -1,0 +1,40 @@
+1. 2️⃣ TCP vs UDP (important difference)
+1.1 TCP
+
+Reliable, Ordered, Slower
+
+Used for:
+
+HTTP (80), HTTPS (443), SSH (22), FTP (21)
+
+Think: “I care if the data arrives correctly.”
+
+1.2 UDP
+
+Fast - No guarantee, No handshake
+
+Used for:
+
+DNS (53),DHCP (67/68),Games,Streaming
+
+Think: “Speed over perfection.”
+
+2. Common Ports You MUST know (non-negotiable)
+Port	Service 	Why hackers care
+21	    FTP	        Often misconfigured
+22	    SSH	        Brute-force target
+23	    Telnet	    Insecure, ancient
+25	    SMTP	    Email abuse
+53	    DNS	        Spoofing, tunneling
+80	    HTTP	    Web attacks
+443	    HTTPS	    Encrypted web
+3306	MySQL	    Database access
+3389	RDP	        Windows takeover
+
+3. show open port 
+ss -tulnp
+
+
+
+
+
