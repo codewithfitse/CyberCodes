@@ -1,0 +1,44 @@
+Dns stand for domain of internate phone book it trnslate ip addresses to names like google, facebook etc which is greate for non it guys to use it.
+
+1. /etc/hosts (local override weapon)
+
+Example:
+127.0.0.1 facebook.com
+
+Now:
+
+Facebook → your own machine
+
+Browser thinks it’s real
+
+2. /etc/resolv.conf (DNS authority)
+
+This file tells your system which DNS servers to trust.
+
+Example:
+nameserver 8.8.8.8
+nameserver 1.1.1.1
+
+
+3. DNS tools you must know
+#nslookup
+nslookup google.com
+
+Shows:
+IP address, DNS server used, Good for quick checks.
+
+#dig (better, more detailed)
+dig google.com
+
+Shows:
+A records,TTL,Authority servers
+
+
+4.Common DNS record types
+| Record | Meaning       |
+| ------ | ------------- |
+| A      | Domain → IPv4 |
+| AAAA   | Domain → IPv6 |
+| MX     | Mail servers  |
+| NS     | Name servers  |
+| CNAME  | Alias         |
