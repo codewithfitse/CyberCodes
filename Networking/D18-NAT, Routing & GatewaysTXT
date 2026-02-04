@@ -1,0 +1,29 @@
+## WHY NAT EXIST
+
+What NAT does:
+
+Allows many private devices
+
+To share one public IP
+
+####### Your laptop → Router (NAT) → Internet ########
+
+Extra benefits:
+
+Internal IPs are hidden
+
+Direct inbound connections blocked
+
+Slows basic attacks
+
+Routing (ip route)
+
+Tells system: “Where do packets go?”
+
+Default gateway = exit door to internet
+
+ip route
+
+traceroute google.com
+
+ss -rn
