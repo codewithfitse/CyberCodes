@@ -1,0 +1,13 @@
+##Nmap
+
+Full scan -p- checks 65,535 ports
+
+SSH on 2222
+
+Web server on 8081
+
+nmap -A 127.0.0.1
+
+nmap -p- 127.0.0.1
+
+nmap --script vuln 127.0.0.1
