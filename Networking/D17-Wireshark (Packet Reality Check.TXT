@@ -1,0 +1,48 @@
+##Wireshark used to capture packests
+
+HTTP (Very bad, very visible)
+
+An attacker can see:
+
+URLs
+
+Form data (usernames, passwords)
+
+Cookies
+
+Headers
+
+Page content (plain text)
+
+HTTPS (Encrypted)
+
+An attacker can see:
+
+IP addresses
+
+Domain name (via SNI)
+
+Packet size & timing
+
+That a connection exists
+
+They cannot see:
+
+Passwords
+
+Page content
+
+Form data
+
+Cookies (content)
+
+
+After caturing teaffic:
+
+http
+dns
+tcp.port == 80
+
+
+
+
