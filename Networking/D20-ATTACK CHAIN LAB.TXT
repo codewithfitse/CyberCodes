@@ -1,0 +1,33 @@
+## What can attacker sniff?
+
+DNS queries
+
+Unencrypted traffic (HTTP)
+
+Packet metadata
+
+Sometimes cookies (if badly configured)
+
+## What attacks are possible?
+
+Man-in-the-Middle (MITM)
+
+Evil Twin Wi-Fi
+
+Session hijacking
+
+DNS spoofing
+
+Traffic sniffing
+
+## How do you defend?
+
+Use HTTPS (always)
+
+Use VPN on public Wi-Fi
+
+Disable auto-connect
+
+Avoid logging into sensitive accounts
+
+Use firewall
