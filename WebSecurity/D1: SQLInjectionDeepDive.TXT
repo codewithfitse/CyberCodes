@@ -1,0 +1,25 @@
+##What is SQL Injection?
+It's a vulnerability that allows an attacker to interfere with the queries that an application makes to its database.
+
+##Types of SQLi:
+
+In-band (Classic): Error-based or union-based.
+
+Blind: Boolean or time-based.
+
+Out-of-band: Using different channels for data exfiltration.
+
+##Demonstrate a basic SQLi attack:
+
+Input something like ' OR '1'='1 -- into a login form.
+
+##Mitigation Techniques
+
+Prepared Statements:
+Use parameterized queries to ensure that user input is treated as data, not code.
+
+Input Validation:
+Sanitize and validate user inputs to prevent malicious data.
+
+Web Application Firewall (WAF):
+Use a WAF to filter out malicious queries.
