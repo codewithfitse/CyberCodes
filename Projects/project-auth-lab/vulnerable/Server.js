@@ -1,32 +1,64 @@
-// vulnerable/server.js (minimal, intentionally insecure for lab)
-const express = require('express');
-const bodyParser = require('body-parser');
-const sqlite3 = require('sqlite3').verbose();
-const session = require('express-session');
+// vulnerable/server.js (ES Modules, intentionally insecure)
+
+import express from "express";
+import bodyParser from "body-parser";
+import sqlite3 from "sqlite3";
+import session from "express-session";
+
 
 const app = express();
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(session({ secret: "dev_secret", resave: false, saveUninitialized: true }));
 
-const db = new sqlite3.Database('./db.sqlite');
+const SQLite3 = sqlite3.verbose();
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json())
+app.use(
+  session({
+    secret: "dev_secret", // weak secret (intentional)
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+
+const db = new SQLite3.Database("./db.sqlite");
+
 db.serialize(() => {
-  db.run(`CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, username TEXT, password TEXT)`);
-  db.run(`INSERT OR IGNORE INTO users (id, username, password) VALUES (1, 'alice', 'password123')`);
+  db.run(`
+    CREATE TABLE IF NOT EXISTS users (
+      id INTEGER PRIMARY KEY,
+      username TEXT,
+      password TEXT
+    )
+  `);
+
+  db.run(`
+    INSERT OR IGNORE INTO users (id, username, password)
+    VALUES (1, 'Fitsum', 'password123')
+  `);
 });
 
-// Vulnerable login: string concatenation (SQLi), plaintext passwords, predictable session
-app.get('/', (req, res) => res.send('Auth lab - vulnerable'));
-app.post('/login', (req, res) => {
+// Home route
+app.get("/", (req, res) => {
+  res.send("Auth lab - vulnerable version running");
+});
+
+// 🚨 Vulnerable login
+app.post("/login", (req, res) => {
   const { username, password } = req.body;
-  // VULNERABLE: direct string interpolation
+
+  // SQL Injection vulnerability (intentional)
   const sql = `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`;
+
   db.get(sql, (err, row) => {
     if (row) {
       req.session.user = row.username;
       return res.send(`Welcome ${row.username}`);
     }
-    res.status(401).send('Invalid');
+
+    res.status(401).send("Invalid credentials");
   });
 });
 
-app.listen(3000, () => console.log('Vulnerable app on :3000'));
+app.listen(3000, () => {
+  console.log("Vulnerable app running on http://localhost:3000");
+});
