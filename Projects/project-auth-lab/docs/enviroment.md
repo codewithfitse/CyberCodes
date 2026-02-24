@@ -48,7 +48,17 @@ password: password123
 
 ---
 
-## Notes
+## Secure Version Environment Variables
 
-This environment intentionally contains security vulnerabilities.
-Do not expose it to the internet.
+The secure application uses environment variables to protect sensitive configuration.
+
+Example `.env` file:
+
+```
+SESSION_SECRET=your_random_secret_here
+PORT=3000
+```
+
+Environment variables prevent secrets from being exposed in source code repositories.
+
+---
