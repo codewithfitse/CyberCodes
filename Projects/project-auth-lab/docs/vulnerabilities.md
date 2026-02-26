@@ -16,16 +16,25 @@ User input is directly embedded into the query without sanitization or parameter
 
 ---
 
-## Impact
+## Plaintext Password Storage
 
-An attacker can:
+### Description
 
-* Bypass authentication
-* Access arbitrary user accounts
-* Potentially extract database data
-* Escalate privileges if admin accounts exist
+The vulnerable application stored user passwords in plaintext within the database.
+
+If the database were compromised, attackers could immediately access user credentials.
 
 ---
+ 
+### Impact
+
+* Account takeover
+* Credential reuse attacks
+* Privilege escalation
+* Data breaches
+
+---
+
 
 ## Root Cause
 
@@ -34,6 +43,7 @@ The vulnerability exists because:
 1. User input is trusted.
 2. SQL query is constructed using string interpolation.
 3. No prepared statements are used.
+4. Passwords were stored without hashing or encryption.
 
 ---
 
