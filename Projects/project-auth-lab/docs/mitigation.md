@@ -60,6 +60,42 @@ bcrypt provides:
 
 ---
 
+## Session Security Improvements
+
+Several protections were implemented to secure user sessions.
+
+### Cookie Security Flags
+
+```js
+cookie: {
+  httpOnly: true,
+  secure: true,
+  sameSite: "lax"
+}
+```
+
+These flags prevent client-side access and reduce attack surface.
+
+---
+
+### Session Regeneration
+
+After successful login:
+
+```js
+req.session.regenerate(...)
+```
+
+This prevents session fixation attacks.
+
+---
+
+### Session Expiration
+
+Sessions now expire automatically after a defined time period.
+
+---
+
 ## Additional Improvements
 
 * Stronger session secret
@@ -72,6 +108,7 @@ bcrypt provides:
 
 1. Authentication bypass via SQL Injection is no longer possible.
 2. If the database is leaked, attackers cannot directly read user passwords.
+3. The risk of session hijacking and fixation attacks is significantly reduced.
 
 ---
 
@@ -84,3 +121,4 @@ Prepared statements are the standard defense against SQL Injection across all ma
 ## Next Steps
 
 Implement password hashing to prevent credential theft.
+
