@@ -31,6 +31,35 @@ The database treats user input strictly as data, preventing injection attacks.
 
 ---
 
+
+## Password Hashing with bcrypt
+
+Passwords are now stored using bcrypt hashing.
+
+Example:
+
+```js
+const hash = await bcrypt.hash(password, 10);
+```
+
+During login:
+
+```js
+const match = await bcrypt.compare(password, storedHash);
+```
+
+---
+
+## Why bcrypt Is Secure
+
+bcrypt provides:
+
+* Salted hashes
+* Adaptive cost factor
+* Resistance to brute-force attacks
+
+---
+
 ## Additional Improvements
 
 * Stronger session secret
@@ -41,7 +70,8 @@ The database treats user input strictly as data, preventing injection attacks.
 
 ## Security Outcome
 
-Authentication bypass via SQL Injection is no longer possible.
+1. Authentication bypass via SQL Injection is no longer possible.
+2. If the database is leaked, attackers cannot directly read user passwords.
 
 ---
 
