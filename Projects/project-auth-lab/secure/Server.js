@@ -3,25 +3,25 @@ import bodyParser from "body-parser";
 import sqlite3 from "sqlite3";
 import session from "express-session";
 import dotenv from "dotenv";
+import bcrypt from "bcrypt";
 
-dotenv.config(); // load env variables
+dotenv.config();
 
 const app = express();
 const SQLite3 = sqlite3.verbose();
 
 const PORT = process.env.PORT || 3000;
-const SESSION_SECRET = process.env.SESSION_SECRET || "fallback_secret";
+const SESSION_SECRET = process.env.SESSION_SECRET;
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.json())
+app.use(express.json());
+
 app.use(
   session({
     secret: SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    cookie: {
-      httpOnly: true,
-    },
+    cookie: { httpOnly: true },
   })
 );
 
@@ -31,20 +31,41 @@ app.get("/", (req, res) => {
   res.send("Secure auth server running");
 });
 
+
+// ✅ REGISTER (hash password)
+app.post("/register", async (req, res) => {
+  const { username, password } = req.body;
+
+  const hashed = await bcrypt.hash(password, 10);
+
+  const sql = `INSERT INTO users (username, password) VALUES (?, ?)`;
+
+  db.run(sql, [username, hashed], (err) => {
+    if (err) return res.status(500).send("Error");
+
+    res.send("User created");
+  });
+});
+
+
+// ✅ LOGIN (compare hash)
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
 
-  const sql = `SELECT * FROM users WHERE username = ? AND password = ?`;
+  const sql = `SELECT * FROM users WHERE username = ?`;
 
-  db.get(sql, [username, password], (err, row) => {
-    if (err) return res.status(500).send("Database error");
+  db.get(sql, [username], async (err, row) => {
+    if (err) return res.status(500).send("Error");
 
-    if (row) {
-      req.session.user = row.username;
-      return res.send(`Welcome ${row.username}`);
-    }
+    if (!row) return res.status(401).send("Invalid");
 
-    res.status(401).send("Invalid credentials");
+    const match = await bcrypt.compare(password, row.password);
+
+    if (!match) return res.status(401).send("Invalid");
+
+    req.session.user = row.username;
+
+    res.send(`Welcome ${row.username}`);
   });
 });
 
