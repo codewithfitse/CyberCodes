@@ -26,15 +26,26 @@ If the database were compromised, attackers could immediately access user creden
 
 ---
  
+## Weak Session Configuration
+
+### Description
+
+The initial session implementation lacked proper security controls such as cookie flags and session regeneration.
+
+---
+
 ### Impact
 
 * Account takeover
 * Credential reuse attacks
 * Privilege escalation
 * Data breaches
+* Session hijacking
+* Session fixation
+* Cookie theft
+* Unauthorized account access
 
 ---
-
 
 ## Root Cause
 
@@ -44,9 +55,11 @@ The vulnerability exists because:
 2. SQL query is constructed using string interpolation.
 3. No prepared statements are used.
 4. Passwords were stored without hashing or encryption.
+5. Default session settings were used without security hardening.
 
 ---
 
 ## Severity
 
-High — Authentication bypass is a critical vulnerability.
+1. High — Authentication bypass is a critical vulnerability.
+2. High — session compromise can lead to full account takeover.
