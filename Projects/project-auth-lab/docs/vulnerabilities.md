@@ -44,8 +44,18 @@ The initial session implementation lacked proper security controls such as cooki
 * Session fixation
 * Cookie theft
 * Unauthorized account access
+* If successful, the attacker gains full access to the victim’s account.
 
 ---
+
+## No Rate Limiting on Login
+
+### Description
+The login endpoint allowed unlimited authentication attempts.
+
+### Risk
+Attackers could automate password guessing through brute force or credential stuffing attacks.
+
 
 ## Root Cause
 
@@ -63,3 +73,4 @@ The vulnerability exists because:
 
 1. High — Authentication bypass is a critical vulnerability.
 2. High — session compromise can lead to full account takeover.
+3. High — Could guess password and takeover whole account.

@@ -96,12 +96,29 @@ Sessions now expire automatically after a defined time period.
 
 ---
 
+## Brute Force Protection
+
+### Implemented Controls
+
+- Failed login attempt tracking per user
+- Temporary account lockout after 5 failed attempts
+- Lock duration: 5 minutes
+- Reset attempt counter after successful login
+
+### Technical Implementation
+
+The system stores login attempts in memory:
+
+```js
+const loginAttempts = {};
+
+
 ## Additional Improvements
 
 * Stronger session secret
 * httpOnly cookie configuration
 * Disabled unnecessary session initialization
-
+* Rate-Limiting
 ---
 
 ## Security Outcome
@@ -109,6 +126,7 @@ Sessions now expire automatically after a defined time period.
 1. Authentication bypass via SQL Injection is no longer possible.
 2. If the database is leaked, attackers cannot directly read user passwords.
 3. The risk of session hijacking and fixation attacks is significantly reduced.
+4. it stop from guessing randomly without limit.
 
 ---
 
