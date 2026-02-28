@@ -34,6 +34,8 @@ app.use(
   }),
 );
 
+const loginAttempts = {};
+
 const db = new SQLite3.Database("../vulnerable/db.sqlite");
 
 app.get("/", (req, res) => {
@@ -55,21 +57,53 @@ app.post("/register", async (req, res) => {
   });
 });
 
+const MAX_ATTEMPTS = 5;
+const LOCK_TIME = 5 * 60 * 1000; // 5 minutes
+
 // ✅ LOGIN (compare hash)
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
+
+  if (!loginAttempts[username]) {
+    loginAttempts[username] = {
+      count: 0,
+      lockUntil: null,
+    };
+  }
+
+  const userAttempts = loginAttempts[username];
+
+  // 🔒 Check if locked
+  if (userAttempts.lockUntil && Date.now() < userAttempts.lockUntil) {
+    return res.status(403).send("Account locked. Try later.");
+  }
 
   const sql = `SELECT * FROM users WHERE username = ?`;
 
   db.get(sql, [username], async (err, row) => {
     if (err) return res.status(500).send("Error");
 
-    if (!row) return res.status(401).send("Invalid");
+    if (!row) {
+      return res.status(401).send("Invalid credentials");
+    }
 
     const match = await bcrypt.compare(password, row.password);
 
-    if (!match) return res.status(401).send("Invalid");
+    if (!match) {
+      userAttempts.count++;
 
+      if (userAttempts.count >= MAX_ATTEMPTS) {
+        userAttempts.lockUntil = Date.now() + LOCK_TIME;
+        console.log(`User ${username} locked out.`);
+      }
+
+      return res.status(401).send("Invalid credentials");
+    }
+
+    // ✅ Reset attempts on success
+    loginAttempts[username] = { count: 0, lockUntil: null };
+
+    // 🔐 Regenerate session (prevents fixation)
     req.session.regenerate((err) => {
       if (err) return res.status(500).send("Session error");
 
