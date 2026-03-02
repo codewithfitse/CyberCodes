@@ -59,6 +59,24 @@ app.post("/login", (req, res) => {
   });
 });
 
+app.post("/change-password", async (req, res) => {
+  if (!req.session.user) {
+    return res.status(401).send("Unauthorized");
+  }
+
+  const { password } = req.body;
+
+  const hashed = await bcrypt.hash(password, 10);
+
+  const sql = `UPDATE users SET password = ? WHERE username = ?`;
+
+  db.run(sql, [hashed, req.session.user], (err) => {
+    if (err) return res.status(500).send("Error");
+
+    res.send("Password changed");
+  });
+});
+
 app.listen(3000, () => {
   console.log("Vulnerable app running on http://localhost:3000");
 });
