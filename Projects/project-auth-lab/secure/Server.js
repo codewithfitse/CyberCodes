@@ -5,6 +5,7 @@ import session from "express-session";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
 import cookieParser from "cookie-parser";
+import csurf from "csurf";
 
 dotenv.config();
 
@@ -33,6 +34,10 @@ app.use(
     },
   }),
 );
+
+const csrfProtection = csurf();
+
+app.use(csrfProtection);
 
 const loginAttempts = {};
 
