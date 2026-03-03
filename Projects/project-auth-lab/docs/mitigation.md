@@ -121,12 +121,29 @@ const loginAttempts = {};
 * Rate-Limiting
 ---
 
+
+## CSRF Protection
+
+### Implemented Control
+
+The `csurf` middleware was added to require a CSRF token for all state-changing requests.
+
+### Technical Flow
+
+1. Server generates token per session.
+2. Token embedded in legitimate forms.
+3. Server validates token on submission.
+4. Invalid or missing tokens are rejected.
+
+---
+
 ## Security Outcome
 
 1. Authentication bypass via SQL Injection is no longer possible.
 2. If the database is leaked, attackers cannot directly read user passwords.
 3. The risk of session hijacking and fixation attacks is significantly reduced.
 4. it stop from guessing randomly without limit.
+5. Prevents cross-site request forgery attacks.
 
 ---
 
