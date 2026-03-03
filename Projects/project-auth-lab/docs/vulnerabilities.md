@@ -34,6 +34,15 @@ The initial session implementation lacked proper security controls such as cooki
 
 ---
 
+
+## Missing CSRF Protection
+
+### Description
+State-changing routes did not verify request origin or authenticity.
+
+---
+
+
 ### Impact
 
 * Account takeover
@@ -45,6 +54,7 @@ The initial session implementation lacked proper security controls such as cooki
 * Cookie theft
 * Unauthorized account access
 * If successful, the attacker gains full access to the victim’s account.
+* Account takeover, password changes, financial actions.
 
 ---
 
